@@ -14,6 +14,8 @@ services:
       - MONGO_URI=mongodb://imcmongoc:27017/local
     restart: always
     build: .
+    networks:
+      - kong-net
     volumes:
       # //- jsondata:/data/json
       # - images:/data/images
