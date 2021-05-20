@@ -1,0 +1,31 @@
+version: "2"
+networks:
+  kong-net:
+    external: true
+# volumes:
+#   mongodbdata:
+#     external: true
+
+services:
+  imclogin:
+    container_name: imcloginc
+    image: yknam/imclogin
+    environment:
+      - MONGO_URI=mongodb://imcmongoc:27017/local
+    restart: always
+    build: .
+    volumes:
+      # //- jsondata:/data/json
+      # - images:/data/images
+      - /.env:/app/.env
+    ports:
+      - "9001:9001"
+#   imcmongo:
+#     container_name: imcmongoc
+#     image: yknam/imcmongo:first
+#     restart: always
+#     volumes:
+#       #- ../Program\ Files/MongoDB/Server/4.0/data:/data/db
+#       - mongodbdata:/data/db
+#     ports:
+#       - "9007:27017"

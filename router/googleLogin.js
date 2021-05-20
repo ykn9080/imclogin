@@ -1,20 +1,4 @@
-import fetch from "node-fetch";
-import express from "express";
-import session from "express-session";
-//const session = require("express-session");
-//var passport = require("passport");
-
 module.exports = (app, passport) => {
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
-  app.use(passport.initialize());
-  app.use(passport.session());
-
   function isLoggedIn(req, res, next) {
     console.log(req.user);
     req.user ? next() : res.sendStatus(401);

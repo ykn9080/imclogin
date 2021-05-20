@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
   );
 
   app.get("/admin", isLoggedIn, (req, res) => {
-    console.log(req);
+    //console.log(req);
     res.send(`Hello, success ${JSON.stringify(req.user, null, 4)}`); // );
   });
 

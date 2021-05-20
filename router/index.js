@@ -1,8 +1,7 @@
-import session from "express-session";
+var session = require("express-session");
 
-module.exports = (app, passport) => {
-  var passport = require("passport");
-
+var passport = require("passport");
+module.exports = (app) => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET,

@@ -1,7 +1,8 @@
 // ESM syntax is supported.
-import express from "express";
-const app = express();
+var express = require("express");
+app = express();
+require("dotenv").config();
 require("./router/index.js")(app);
-const PORT = process.env.PORT || 9001;
+
+const PORT = 9001;
 app.listen(PORT, () => console.log("listening on localhost:" + PORT));
-export {};
