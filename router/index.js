@@ -14,19 +14,41 @@ module.exports = (app) => {
   require("./githubLogin.js")(app, passport);
   require("./googleLogin.js")(app, passport);
   require("./googleLogin.js")(app, passport);
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../static/index.html"));
-    // res.send(
-    //   '<a href="/auth/google">Authenticate with Google</a><a href="/auth/github">Authenticate with Github</a>'
-    // );
+  require("./login.js")(app, passport);
+  require("./signup.js")(app, passport);
+
+  app.get("/", function (req, res) {
+    var name = req?.user?.name;
+
+    res.render("index.ejs", { user: {} });
   });
-  app.get("/register", (req, res) => {
-    res.sendFile(path.join(__dirname, "../static/register.html"));
+
+  app.get("/logout", (req, res) => {
+    req.logout();
+    req.session.destroy();
+    //res.send("Goodbye!");
+    var user = req.user;
+    if (!user) user = "";
+    res.render("index.ejs", {
+      user: user,
+    });
   });
-  app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../static/login.html"));
-  });
-  app.post("/login", (req, res) => {
-    consolg.log(req.body);
-  });
+  // app.get("/signup", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../static/signup.html"));
+  // });
+  // app.get("/signup1", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../static/signup1.html"));
+  // });
+  // app.post("/signup", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../static/signup.html"));
+  // });
+  // app.post("/signup1", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../static/signup1.html"));
+  // });
+  // app.get("/login", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../static/login.html"));
+  // });
+  // app.post("/login", (req, res) => {
+  //   consolg.log(req.body);
+  // });
 };

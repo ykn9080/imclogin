@@ -1,7 +1,6 @@
 var Model = require("../model/models.js");
 var User = Model.user;
 var config = require("../config/");
-var ejs = require("ejs");
 // var filefunc = require("../function/filefunc");
 // var crudfunc = require("../function/crudfunc");
 // var getAllChildren = require("../function/getAllChildren");
@@ -10,41 +9,20 @@ var ejs = require("ejs");
 
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
-  console.log("im in login");
-  app.get("/login/id", function (req, res) {
-    // render the page and pass in any flash data if it exists
-    //res.render('login.html', {message: req.flash('loginMessage')});
-    User.find({ id: req.params.id })
-      //Table.findById(req.params.id)
-      .then((result) => {
-        if (!result) {
-          return res.status(404).send({
-            message: "data not found with id " + req.params.id,
-          });
-        }
-        res.send(result);
-      })
-      .catch((err) => {
-        if (err.kind === "ObjectId") {
-          return res.status(404).send({
-            message: "user not found with id " + req.params.id,
-          });
-        }
-        return res.status(500).send({
-          message: "Error retrieving user with id " + req.params.id,
-        });
-      });
-  });
+  console.log("im in signup");
 
-  app.post("/login", function (req, res, next) {
+  app.post("/signup", function (req, res, next) {
     // generate the authenticate method and pass the req/res
-    passport.authenticate("login", function (err, user, info) {
+    console.log(req.body);
+
+    passport.authenticate("signup", function (err, user, info) {
       console.log(user, info);
       if (err) {
         return next(err);
       }
       if (!user) {
-        return res.send(info); //res.redirect('/');
+        //return res.send(info); //res.redirect('/');
+        return res.status(409).send("User Already Exist. Please Login");
       }
 
       // req / res held in closure
@@ -100,20 +78,16 @@ module.exports = (app, passport) => {
         // var imcdata = JSON.parse(crudfunc.readFile(spath1));
         // imcdata = removedatalist(imcdata);
         //console.log("spath:", spath, "myinfo:", myinfo, "obj.key:", Object.keys(JSON.parse(file)));
-        //return res.redirect("index.html");
-        return res.render("index.ejs", { user: { name: user.id } });
-        // return res
-        //   .status(200)
-        //   .json({
-        //     token: JWTToken,
-        //     user: user,
-        //     // list: list,
-        //     // system: system,
-        //     // file: file,
-        //     // dtsrc: JSON.stringify(imcdata),
-        //     // menu: JSON.stringify(usermenu),
-        //     // openmenu: openmenu,
-        //   })
+        return res.status(200).json({
+          token: JWTToken,
+          user: user,
+          // list: list,
+          // system: system,
+          // file: file,
+          // dtsrc: JSON.stringify(imcdata),
+          // menu: JSON.stringify(usermenu),
+          // openmenu: openmenu,
+        });
       }
     })(req, res, next);
   });

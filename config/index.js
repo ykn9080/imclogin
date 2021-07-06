@@ -25,7 +25,7 @@ const basic = {
     jwtSecret: "hellohello",
     //,datasrc:'json'//json,mongodb,mssql
     datasrc: "mongodb",
-    username: "id", //_id,username,email
+    username: "username", //id,_id,username,email
     password: "password",
   },
 };

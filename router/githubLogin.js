@@ -23,12 +23,6 @@ module.exports = (app, passport) => {
     res.send(`Hello, success ${JSON.stringify(req.user, null, 4)}`); // );
   });
 
-  app.get("/logout", (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.send("Goodbye!");
-  });
-
   app.get("/login/github/failure", (req, res) => {
     res.send("Failed to authenticate..");
   });
