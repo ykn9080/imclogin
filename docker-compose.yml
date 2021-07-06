@@ -2,9 +2,6 @@ version: "2"
 networks:
   kong-net:
     external: true
-# volumes:
-#   mongodbdata:
-#     external: true
 
 services:
   imclogin:
@@ -22,12 +19,5 @@ services:
       - /.env:/app/.env
     ports:
       - "9001:9001"
-#   imcmongo:
-#     container_name: imcmongoc
-#     image: yknam/imcmongo:first
-#     restart: always
-#     volumes:
-#       #- ../Program\ Files/MongoDB/Server/4.0/data:/data/db
-#       - mongodbdata:/data/db
-#     ports:
-#       - "9007:27017"
+    external_links:
+      - imcmongoc

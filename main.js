@@ -1,6 +1,14 @@
 // ESM syntax is supported.
 var express = require("express");
+require("./config/dbConnect.js");
 app = express();
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.static("static"));
+app.use(express.json());
 require("dotenv").config();
 require("./router/index.js")(app);
 

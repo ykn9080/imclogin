@@ -14,10 +14,12 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "mongoose": "^5.13.2",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
-    "passport-google-oauth2": "^0.2.0"
+    "passport-google-oauth2": "^0.2.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "rimraf": "^3.0.2"
