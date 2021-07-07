@@ -1,6 +1,6 @@
 module.exports = (app, passport) => {
   function isLoggedIn(req, res, next) {
-    console.log(req.user);
+    console.log("requ.user from isLoggedIn: ", req.user);
     req.user ? next() : res.sendStatus(401);
   }
   //module.exports = (app, passport) => {
@@ -20,6 +20,7 @@ module.exports = (app, passport) => {
 
   app.get("/admin", isLoggedIn, (req, res) => {
     console.log(req);
+
     res.send(`Hello, success ${req.user.displayName}`); // );
   });
 

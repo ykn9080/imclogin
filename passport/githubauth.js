@@ -16,7 +16,14 @@ module.exports = (app, passport) => {
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
         //   return done(err, profile);
         // });
-        console.log("access: ", accessToken, "refresh: ", refreshToken);
+        console.log(
+          "access: ",
+          accessToken,
+          "refresh: ",
+          refreshToken,
+          "profile: ",
+          profile
+        );
         return done(null, profile);
       }
     )

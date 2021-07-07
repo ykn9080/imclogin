@@ -4,7 +4,7 @@ var passport = require("passport");
 var path = require("path");
 require("dotenv").config();
 require("./config/dbConnect.js");
-app = express();
+var app = express();
 app.use(
   express.urlencoded({
     extended: true,
@@ -19,9 +19,9 @@ app.engine("html", require("ejs").renderFile);
 app.use(passport.initialize());
 var initPassport = require("./passport/init");
 
-initPassport(passport);
+initPassport(app, passport);
 
-require("./router/index.js")(app);
+require("./router/index.js")(app, passport);
 
 const PORT = process.env.PORT | 9001;
 app.listen(PORT, () => console.log("listening on localhost:" + PORT));

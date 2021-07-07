@@ -1,12 +1,6 @@
 var Model = require("../model/models.js");
 var User = Model.user;
 var config = require("../config/");
-var ejs = require("ejs");
-// var filefunc = require("../function/filefunc");
-// var crudfunc = require("../function/crudfunc");
-// var getAllChildren = require("../function/getAllChildren");
-
-// const models = require("../model/models");
 
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
@@ -77,60 +71,15 @@ module.exports = (app, passport) => {
         const JWTToken = jwt.sign(payload, config.basic.passport.jwtSecret, {
           expiresIn: "6h",
         });
-        //const myinfo = user.comp + "," + user.id;
-        //    if(user.group=="SystemAdmins")  myinfo="";
-        // var spath = filefunc.findpathread("/data/json/imctable.json", myinfo);
-        // var spath1 = filefunc.findpathread("/data/json/imcdata.json", myinfo);
-        // var spath2 = filefunc.findpathread(
-        //   "/data/json/imcsetting.json",
-        //   user.comp + ","
-        // );
-        // var spath3 = filefunc.findpathread("/data/json/imclist.json", myinfo);
-        // var file = crudfunc.readFile(spath);
-        // var system = crudfunc.readFile(spath2);
-        // var list = crudfunc.readFile(spath3);
-        // if (system != "") system = JSON.parse(system);
-        // // var css=system.csslist;
-        // // delete system.csslist;
-        // const usermenu = await models.Menu.find({
-        //   //comp: user.comp,
-        //   type: "user",
-        // });
-        // const openmenu = await models.Menu.find({ type: "open" });
-        // var imcdata = JSON.parse(crudfunc.readFile(spath1));
-        // imcdata = removedatalist(imcdata);
-        //console.log("spath:", spath, "myinfo:", myinfo, "obj.key:", Object.keys(JSON.parse(file)));
-        //return res.redirect("index.html");
+
         return res.render("index.ejs", { user: { name: user.id } });
         // return res
         //   .status(200)
         //   .json({
         //     token: JWTToken,
         //     user: user,
-        //     // list: list,
-        //     // system: system,
-        //     // file: file,
-        //     // dtsrc: JSON.stringify(imcdata),
-        //     // menu: JSON.stringify(usermenu),
-        //     // openmenu: openmenu,
         //   })
       }
     })(req, res, next);
   });
-
-  function removedatalist(imcdata) {
-    imcdata.forEach((dtsrc) => {
-      if (dtsrc.dtype == "database") {
-        if (dtsrc.hasOwnProperty("querylist")) {
-          dtsrc.querylist.forEach((k) => {
-            if (k.sqlcommand == "select") {
-              k.datalist = [];
-            }
-          });
-        }
-      }
-    });
-
-    return imcdata;
-  }
 };
