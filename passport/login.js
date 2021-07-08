@@ -66,30 +66,6 @@ module.exports = function (passport) {
     )
   );
 
-  // Passport needs to be able to serialize and deserialize users to support persistent login sessions
-  passport.serializeUser(function (user, done) {
-    console.log("serializing user123: ");
-    console.log(user);
-    var uuid;
-    switch (config.basic.passport.datasrc) {
-      case "mongodb":
-        uuid = user._id;
-        break;
-      case "json":
-        uuid = user.id;
-        break;
-    }
-    done(null, uuid);
-  });
-
-  passport.deserializeUser(function (id, done) {
-    console.log("deser!!!!!!!!!!!!!!", id);
-    User.findById(id, function (err, user) {
-      console.log("deserializing user:", user);
-      done(err, user);
-    });
-  });
-
   var isValidPassword = function (user, password) {
     //return ((password==user.password) ? true:false);
     //return bCrypt.compareSync(password, user.local.password);

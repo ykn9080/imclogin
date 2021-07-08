@@ -1,5 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-
+var User = require("../model/user");
 const svr = "http://" + process.env.HOST + ":" + process.env.PORT;
 
 module.exports = (app, passport) => {
@@ -12,6 +12,22 @@ module.exports = (app, passport) => {
         passReqToCallback: true,
       },
       function (request, accessToken, refreshToken, profile, done) {
+        User.findOne({ "google.id": profile.id }).then((currentUser) => {
+          if (currentUser) {
+            console.log("current user is", currentUser);
+          } else {
+            new User({
+              "google.name": profile.displayName,
+              "google.id": profile.id,
+              "google.email": profile.email,
+              "google.token": accessToken,
+            })
+              .save()
+              .then((newUser) => {
+                console.log("new user is:", newUser);
+              });
+          }
+        });
         return done(null, profile);
       }
     )

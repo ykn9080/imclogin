@@ -13,16 +13,15 @@ module.exports = (app, passport) => {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      successRedirect: "/admin",
+      successRedirect: "/",
       failureRedirect: "/login/google/failure",
     })
   );
 
-  app.get("/admin", isLoggedIn, (req, res) => {
-    console.log(req);
-
-    res.send(`Hello, success ${req.user.displayName}`); // );
-  });
+  // app.get("/admin", (req, res) => {
+  //   console.log("req:", req);
+  //   res.redirect("index.ejs", { user: { name: "req" } });
+  // });
 
   app.get("/login/google/failure", (req, res) => {
     res.send("Failed to authenticate..");

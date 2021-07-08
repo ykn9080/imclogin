@@ -16,6 +16,7 @@ module.exports = (app) => {
   require("./googleLogin.js")(app, passport);
   require("./login.js")(app, passport);
   require("./signup.js")(app, passport);
+  require("./setting.js")(app, passport);
 
   // app.get("/", passport.authenticate("local"), function (req, res) {
   //   console.log(req.user);
@@ -24,11 +25,35 @@ module.exports = (app) => {
   //   //   status: "Login successful!",
   //   // });
   // });
-  app.get("/", function (req, res) {
-    var name = req?.user?.name;
-    console.log("req.user:", req.user);
-    res.render("index.ejs", { user: req.user });
+
+  app.route("/").get(async (req, res) => {
+    if (req.user && req.user.displayName) req.user.name = req.user.displayName;
+    // layout.ejs is my version of blocking. I pass the page name as an option to render custom pages in the template
+    return await res.render(`index.ejs`, { user: req.user }, (err, html) =>
+      standardResponse(err, html, res)
+    );
   });
+  const standardResponse = (err, html, res) => {
+    // If error, return 500 page
+    if (err) {
+      console.log(err);
+      // Passing null to the error response to avoid infinite loops XP
+      return res
+        .status(500)
+        .render(`index.ejs`, { page: "500", error: err }, (err, html) =>
+          standardResponse(null, html, res)
+        );
+      // Otherwise return the html
+    } else {
+      return res.status(200).send(html);
+    }
+  };
+  // app.router("get("/", function (req, res) {
+  //   if (req.user && req.user.displayName) req.user.name = req.user.displayName;
+  //   console.log("req.user:", req.user);
+
+  //   res.render("index.ejs", { user: req.user });
+  // });
 
   app.get("/logout", (req, res) => {
     req.logout();

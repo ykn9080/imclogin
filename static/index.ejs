@@ -4,31 +4,37 @@
 
 <head>
     <title>Login Micro FrontEnd</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- load fontawesome -->
-    <style>
-        body {
-            padding-top: 80px;
-        }
-    </style>
+
 </head>
 
 <body>
-    <div class="container">
-
+<nav class="navbar navbar-dark bg-dark">
+    <a href="/"><span class="navbar-brand mb-0 h1">IMCMaster</span></a>
+    <form class="form-inline my-2 my-lg-0">
+        <% if(user && user.name ){ %>
+            
+            <a href="/logout" onclick="return confirm('Are you sure ?');" style="color:white;"><span class="fa fa-user fa-lg" >
+                <%= user.name %>
+            </span> logout</a>
+            <% } else { %>
+            <a href="/login.html" class="btn btn-default" style="color:white;"><span class="fa fa-user fa-lg" ></span></a>
+        <% } %>
+        <a href="/setting.html" class="btn btn-default"><span class="fa fa-gear fa-lg" style="color:white;"></a>
+    </form>
+</nav>
+    <div class="container" style="margin-top:40px">
         <div class="jumbotron text-center">
             <h1><span class="fa fa-lock"></span> Authentication Service</h1>
-            <% if(user.name){ %>
-                <b>hi, <%= user.name %></b>
-                <a href="/logout"   onclick="return confirm('Are you sure ?');"> logout</a>
-                <% } %>
-                    <p></p>
+          
                     <p>Login or Register with:</p>
 
-                    <a href="/login.html" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-                    <a href="/signup.html" class="btn btn-default"><span class="fa fa-plus"></span> Signup</a>
+                    <button type="button" class="btn btn-outline-primary"><a href="/login1.html" ><span class="fa fa-user"></span> Login</a></button>
+                    <button type="button" class="btn btn-outline-primary"><a href="/signup1.html" ><span class="fa fa-plus"></span> Signup</a></button>
                     
         </div>
 

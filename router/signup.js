@@ -9,11 +9,12 @@ var config = require("../config/");
 
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
-  console.log("im in signup");
 
   app.post("/signup", function (req, res, next) {
     // generate the authenticate method and pass the req/res
-    console.log(req.body);
+    console.log("im in signup");
+    console.log(req);
+    return;
 
     passport.authenticate("signup", function (err, user, info) {
       console.log(user, info);

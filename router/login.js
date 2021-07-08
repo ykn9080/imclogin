@@ -33,7 +33,7 @@ module.exports = (app, passport) => {
   app.post("/login", function (req, res, next) {
     // generate the authenticate method and pass the req/res
     passport.authenticate("login", function (err, user, info) {
-      console.log(user, info);
+      //console.log(user, info);
       if (err) {
         return next(err);
       }
