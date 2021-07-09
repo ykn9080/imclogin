@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/signup1.css" />
+    <title>setting</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/"><span class="navbar-brand mb-0 h1">Home</span></a>
+    </nav>
+    <div class="container" style="margin-top:40px;max-width:600px">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <form action="/setsave" method="post">
+                        <input type="text"  name="filename" value="setting" style="display:none"/>    
+                        <div class="form-group">
+                            <label for="datasrc">Data Type</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="datasrc" id="inlineRadio1" value="mongodb" <% if (set && set.datasrc==="mongodb") { %>  checked <% } %>>
+                            <label class="form-check-label" for="inlineRadio1">MongoDB</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="datasrc" id="inlineRadio2" value="json" <% if (set && set.datasrc==="json") { %>  checked <% } %>>
+                            <label class="form-check-label" for="inlineRadio2">File</label>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                                placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1" name="check">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

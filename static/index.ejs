@@ -1,7 +1,6 @@
 <!-- views/index.ejs -->
 <!doctype html>
 <html>
-
 <head>
     <title>Login Micro FrontEnd</title>
     <!-- load bootstrap css -->
@@ -9,36 +8,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- load fontawesome -->
-
 </head>
-
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <a href="/"><span class="navbar-brand mb-0 h1">IMCMaster</span></a>
-    <form class="form-inline my-2 my-lg-0">
-        <% if(user && user.name ){ %>
-            
-            <a href="/logout" onclick="return confirm('Are you sure ?');" style="color:white;"><span class="fa fa-user fa-lg" >
-                <%= user.name %>
-            </span> logout</a>
-            <% } else { %>
-            <a href="/login.html" class="btn btn-default" style="color:white;"><span class="fa fa-user fa-lg" ></span></a>
-        <% } %>
-        <a href="/setting.html" class="btn btn-default"><span class="fa fa-gear fa-lg" style="color:white;"></a>
-    </form>
-</nav>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/"><span class="navbar-brand mb-0 h1">Home</span></a>
+        <form class="form-inline my-2 my-lg-0">
+            <% if(user && user.name ){ %>
+                <a href="/logout" onclick="return confirm('Are you sure ?');" style="color:white;"><span class="fa fa-user fa-lg" >
+                    <%= user.name %>
+                </span> logout</a>
+                <% } else { %>
+                <a href="/login.html" class="btn btn-default" style="color:white;"><span class="fa fa-user fa-lg" ></span></a>
+            <% } %>
+            <a href="/setting.html" class="btn btn-default"><span class="fa fa-gear fa-lg" style="color:white;"></a>
+        </form>
+    </nav>
     <div class="container" style="margin-top:40px">
         <div class="jumbotron text-center">
             <h1><span class="fa fa-lock"></span> Authentication Service</h1>
-          
-                    <p>Login or Register with:</p>
-
-                    <button type="button" class="btn btn-outline-primary"><a href="/login1.html" ><span class="fa fa-user"></span> Login</a></button>
-                    <button type="button" class="btn btn-outline-primary"><a href="/signup1.html" ><span class="fa fa-plus"></span> Signup</a></button>
-                    
+                <p> <% if(user && user.name ){ %>Hi, 
+                        <%= user.name %><a href="/logout" onclick="return confirm('Are you sure ?');"> logout</a><% } else { %>Login or Register<% } %></p>
+                <button type="button" class="btn btn-outline-primary"><a href="/login1.html" ><span class="fa fa-user"></span> Login</a></button>
+                <button type="button" class="btn btn-outline-primary"><a href="/signup1.html" ><span class="fa fa-plus"></span> Signup</a></button>
         </div>
-
     </div>
 </body>
-
 </html>

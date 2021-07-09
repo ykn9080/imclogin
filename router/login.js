@@ -33,7 +33,6 @@ module.exports = (app, passport) => {
   app.post("/login", function (req, res, next) {
     // generate the authenticate method and pass the req/res
     passport.authenticate("login", function (err, user, info) {
-      //console.log(user, info);
       if (err) {
         return next(err);
       }
@@ -56,7 +55,7 @@ module.exports = (app, passport) => {
 
         switch (config.basic.passport.datasrc) {
           case "json":
-            uuid = user.id;
+            uuid = user.username;
             break;
           case "mongodb":
             uuid = user._id;
@@ -71,8 +70,8 @@ module.exports = (app, passport) => {
         const JWTToken = jwt.sign(payload, config.basic.passport.jwtSecret, {
           expiresIn: "6h",
         });
-
-        return res.render("index.ejs", { user: { name: user.id } });
+        console.log("username:", user.name);
+        return res.render("index.ejs", { user: { name: user.name } });
         // return res
         //   .status(200)
         //   .json({

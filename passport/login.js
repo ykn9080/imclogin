@@ -2,7 +2,8 @@ var LocalStrategy = require("passport-local").Strategy;
 
 var User = require("../model/user");
 
-//var JsonUser = require("../data/json/imcregister.json");
+var setting = require("../data/setting.json");
+var JsonUser = require("../data/imcregister.json");
 var bCrypt = require("bcrypt-nodejs");
 const config = require("../config/");
 const username_field = config.basic.passport.username;
@@ -22,9 +23,13 @@ module.exports = function (passport) {
         passReqToCallback: true,
       },
       function (req, username, password, done) {
+        console.log(username, password, setting.datasrc);
         // check in mongo if a user with username exists or not
         //console.log('chk login',req.body,username,password,config.basic.passport.datasrc)
-        switch (config.basic.passport.datasrc) {
+
+        switch (
+          setting.datasrc //(config.basic.passport.datasrc) {
+        ) {
           case "mongodb":
             User.findOne(
               {
@@ -51,16 +56,16 @@ module.exports = function (passport) {
               }
             );
             break;
-          //   case "json":
-          //     var user = JsonUser.user.filter(function (usr) {
-          //       //console.log(usr.email,username)
-          //       return usr.id == username;
-          //     });
-          //     if (user[0]) return done(null, user[0], user[0]);
-          //     else {
-          //       return done(null, false, req.flash("message", "User Not found."));
-          //     }
-          //     break;
+          case "json":
+            var user = JsonUser.filter(function (usr) {
+              //console.log(usr.email,username)
+              return usr.username == username;
+            });
+            if (user[0]) return done(null, user[0], user[0]);
+            else {
+              return done(null, false, req.flash("message", "User Not found."));
+            }
+            break;
         }
       }
     )

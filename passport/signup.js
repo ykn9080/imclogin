@@ -3,7 +3,7 @@ var User = require("../model/user");
 // var Company = require("../model/company");
 var bCrypt = require("bcrypt-nodejs");
 var config = require("../config/");
-// var jsonUser = require("../data/json/imcregister.json");
+var jsonUser = require("../data/imcregister.json");
 const username_field = config.basic.passport.username;
 const password_field = config.basic.passport.password;
 module.exports = function (passport) {
@@ -101,16 +101,16 @@ module.exports = function (passport) {
               );
             };
             break;
-          // case "json":
-          //   var user = JsonUser.user.filter(function (usr) {
-          //     console.log(usr.email, username);
-          //     return usr.email == username;
-          //   });
-          //   if (user[0]) return done(null, user[0], user[0]);
-          //   else {
-          //     return done(null, false, req.flash("message", "User Not found."));
-          //   }
-          //   break;
+          case "json":
+            var user = JsonUser.filter(function (usr) {
+              console.log(usr.email, username);
+              return usr.email == username;
+            });
+            if (user[0]) return done(null, user[0], user[0]);
+            else {
+              return done(null, false, req.flash("message", "User Not found."));
+            }
+            break;
         }
         // Delay the execution of findOrCreateUser and execute the method
         // in the next tick of the event loop

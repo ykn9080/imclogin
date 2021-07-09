@@ -12,9 +12,6 @@ module.exports = (app, passport) => {
 
   app.post("/signup", function (req, res, next) {
     // generate the authenticate method and pass the req/res
-    console.log("im in signup");
-    console.log(req);
-    return;
 
     passport.authenticate("signup", function (err, user, info) {
       console.log(user, info);

@@ -1,5 +1,6 @@
 // ESM syntax is supported.
 var express = require("express");
+var flash = require("connect-flash");
 var passport = require("passport");
 var path = require("path");
 var ejs = require("ejs");
@@ -14,7 +15,7 @@ app.use(
 app.use(express.static("static"));
 app.use(express.json());
 app.set("view engine", "ejs");
-
+app.use(flash());
 let ejsOptions = {
   // delimiter: '?', Adding this to tell you do NOT use this like I've seen in other docs, does not work for Express 4
   async: true,
