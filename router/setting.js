@@ -37,18 +37,23 @@ module.exports = (app, passport) => {
     });
   });
 
-  app.post("/setload", function (req, res, next) {
-    var data = fs.readFileSync(`./data/${req.body.filename}`),
-      myObj;
+  app.get("/setload", function (req, res, next) {
+    var data = fs.readFileSync(`./data/${req.query.file}.json`);
+    var dt = JSON.parse(data);
+    console.log(JSON.parse(data));
+    res.render("setting.ejs", { ...dt });
 
-    try {
-      myObj = JSON.parse(data);
-      console.dir(myObj);
-      next(myObj);
-    } catch (err) {
-      console.log("There has been an error parsing your JSON.");
-      console.log(err);
-    }
+    //   myObj;
+
+    // try {
+    //   myObj = JSON.parse(data);
+    //   console.dir(myObj);
+    //   res.render("setting.html");
+    //   //next(myObj);
+    // } catch (err) {
+    //   console.log("There has been an error parsing your JSON.");
+    //   console.log(err);
+    // }
   });
 };
 

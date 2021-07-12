@@ -71,13 +71,23 @@ module.exports = (app, passport) => {
           expiresIn: "6h",
         });
         console.log("username:", user.name);
-        return res.render("index.ejs", { user: { name: user.name } });
+        //return res.render("index.ejs", { user: { name: user.name } });
+
+        //return res.render("index", { user: { name: user.name } });
+        req.flash("success", user.name);
+        res.redirect("/");
+        // return res.status(200).json({
+        //   token: JWTToken,
+        //   user: user,
+        // });
+
         // return res
+        //   .render("index.ejs", { user: { name: user.name } })
         //   .status(200)
         //   .json({
         //     token: JWTToken,
         //     user: user,
-        //   })
+        //   });
       }
     })(req, res, next);
   });

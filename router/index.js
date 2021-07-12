@@ -27,7 +27,11 @@ module.exports = (app) => {
   // });
 
   app.route("/").get(async (req, res) => {
-    if (req.user && req.user.displayName) req.user.name = req.user.displayName;
+    console.log("req.flash", req.flash("success"));
+    if (req.flash("success")) req.user.name = req.flash("success");
+    else if (req.user && req.user.displayName)
+      req.user.name = req.user.displayName;
+
     // layout.ejs is my version of blocking. I pass the page name as an option to render custom pages in the template
     return await res.render(`index.ejs`, { user: req.user }, (err, html) =>
       standardResponse(err, html, res)
