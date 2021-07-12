@@ -1,0 +1,51 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Login Micro FrontEnd</title>
+    <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- load fontawesome -->
+    <script>
+        $(document).ready(function () {
+            let username;
+
+            console.log('username:', '<%=username%>')
+            if('<%=username%>') username= '<%- username%>'
+            if (username){$("#dvUser").show().addClass("form-inline");$("#dvUser").find("label").text(`${username} logout`); $("#dvNone").hide()}
+            else {$("#dvUser").hide(); $("#dvNone").show()}
+        
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/"><span class="navbar-brand mb-0 h1">Home</span></a>
+
+        <form class="form-inline my-2 my-lg-0">
+            <div id="dvUser" style="display:none">
+                <a href="/logout" onclick="return confirm('Are you sure ?');" style="color:white;"><span
+                        class="fa fa-user fa-lg" style="float:left;margin:5px" >
+                    </span><label style="float:left;cursor:pointer"></label> </a>
+                </div>
+                <div id="dvNone">
+                    <a href="/login1.html" class="btn btn-default" style="color:white;"><span
+                            class="fa fa-user fa-lg"></span></a>
+                    </div>
+                        <a href="/setting.html" class="btn btn-default"><span class="fa fa-gear fa-lg" style="color:white;"></a>
+        </form>
+    </nav>
+    <div class="container" style="margin-top:40px">
+        <div class="jumbotron text-center">
+            <h1><span class="fa fa-lock"></span> Authentication Service</h1>
+                <p> <% if(username ){ %>Hi, 
+                        <%= username %><a href="/logout" onclick="return confirm('Are you sure ?');"> logout</a><% } else { %>Login or Register<% } %></p>
+                <button type="button" class="btn btn-outline-primary"><a href="/login1.html" ><span class="fa fa-user"></span> Login</a></button>
+                <button type="button" class="btn btn-outline-primary"><a href="/signup1.html" ><span class="fa fa-plus"></span> Signup</a></button>
+        </div>
+    </div>
+</body>
+</html>
