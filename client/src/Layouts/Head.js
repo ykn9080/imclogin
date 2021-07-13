@@ -3,9 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
 import { Nav, Navbar, NavDropdown, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { useSelector, useDispatch } from "react-redux";
-// import { globalVariable } from "../actions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaUser, FaCog } from "react-icons/fa";
 
 const Topmenu = ({ menu }) => {
@@ -100,7 +97,7 @@ const Head1 = (props) => {
   const [menu, setMenu] = useState();
   const token1 = localStorage.getItem("token");
   useEffect(() => {
-    const usermenu = localStorage.getItem("menu");
+    const usermenu = localStorage.getItem("menu") | "";
     const openmenu = localStorage.getItem("openmenu");
 
     if (token1) {
@@ -111,7 +108,7 @@ const Head1 = (props) => {
       menu1 = JSON.parse(openmenu);
     }
     setMenu(menu1);
-  }, []);
+  }, [token1]);
   function handleSelect(selectedKey) {
     switch (selectedKey) {
       case "edit":
@@ -138,7 +135,7 @@ const Head1 = (props) => {
         className="d-inline-block align-top"
         style={{ width: 20, marginRight: 4, paddingTop: 7 }}
       /> */}
-      IMCMaster
+      Home
     </Navbar.Brand>
   );
 
@@ -148,8 +145,7 @@ const Head1 = (props) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("menu");
-    //dispatch(globalVariable({ token: null }));
+    localStorage.removeItem("user");
   };
   const topright = (
     <Nav onSelect={handleSelect} style={{ marginRight: 20 }}>

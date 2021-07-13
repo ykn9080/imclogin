@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
-import { currentsetting } from "../config/index.js";
 import { notification } from "antd";
 
 function Copyright() {
@@ -56,9 +55,9 @@ export default function SignUp(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${currentsetting.webserviceprefix}signup`, values);
+    console.log(`${process.env.REACT_APP_SERVER_URL}/signup`, values);
     axios
-      .post(`${currentsetting.webserviceprefix}signup`, values)
+      .post(`${process.env.REACT_APP_SERVER_URL}/signup`, values)
       .then(function (response) {
         openNotificationWithIcon(
           "success",

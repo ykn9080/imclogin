@@ -3,7 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { currentsetting } from "../config/index.js";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -20,7 +19,7 @@ const Footer = () => {
   return (
     <Container className={classes.footer}>
       <Typography variant="title">
-        Footer Text **current server:<b>{currentsetting.webserviceprefix}</b>
+        Footer Text **current server:<b>{process.env.REACT_APP_SERVER_URL}</b>
       </Typography>
     </Container>
   );

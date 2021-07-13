@@ -3,6 +3,7 @@ var express = require("express");
 var flash = require("connect-flash");
 var passport = require("passport");
 var path = require("path");
+var cors = require("cors");
 var ejs = require("ejs");
 require("dotenv").config();
 require("./config/dbConnect.js");
@@ -12,6 +13,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cors());
 app.use(express.static("static"));
 app.use(express.json());
 app.set("view engine", "ejs");

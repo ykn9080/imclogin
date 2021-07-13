@@ -11,13 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
-import { currentsetting } from "../config/index.js";
-import Snack from "../utilities/Snackbar";
+import Snack from "../Utilities/Snackbar";
+import useKeyPress from "../Utilities/CustomHooks";
 import { notification } from "antd";
-import useKeyPress from "../functions/CustomHooks";
 
 const openNotificationWithIcon = (type, message, desc, placement) => {
-  console.log(type, message, desc, placement);
   notification[type]({
     message: [message],
     description: [desc],
@@ -32,19 +30,10 @@ function Copyright() {
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
-function appendPid(menu) {
-  //append pid for
-  menu.map((k, i) => {
-    if (!k.hasOwnProperty("pid")) k.pid = "";
-    menu.slice(i, 1, k);
-    return false;
-  });
-  return menu;
-}
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(4),
@@ -66,16 +55,17 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = (props) => {
   //for snackBar props
-  let warning = false;
+
   const state = props.location.state;
   const refEnter = useRef(null);
   const refPass = useRef(null);
-  if (typeof state != "undefined" && state.needsLogin) warning = true;
+  const classes = useStyles();
+  const pressedEnter = useKeyPress("Enter");
   const { from } = state || { from: { pathname: "/" } };
-
-  //const dispatch = useDispatch();
   const [values, setValues] = useState({});
-  let pressedEnter = useKeyPress("Enter");
+
+  let warning = false;
+  if (typeof state != "undefined" && state.needsLogin) warning = true;
 
   const handleChange = (event) => {
     event.persist();
@@ -83,7 +73,6 @@ const SignIn = (props) => {
       ...values,
       [event.target.name]: event.target.value,
     }));
-    console.log(values);
   };
 
   useEffect(() => {
@@ -94,31 +83,25 @@ const SignIn = (props) => {
   }, [pressedEnter]);
 
   const handleSubmit = async (e) => {
-    console.log("submitted", values);
     e.preventDefault();
     let msg;
     axios
-      .post(`${currentsetting.webserviceprefix}login`, values)
+      .post(`${process.env.REACT_APP_SERVER_URL}/login`, values)
       .then(function (response) {
         const dt = response.data;
-        console.log("response.data:  ", dt);
+
         if (dt.hasOwnProperty("message"))
           msg = ["error", "Login Failed", dt.message];
-        else
-          msg = ["success", dt.user.id, "Welcome to IMCMaster", "bottomRight"];
-        openNotificationWithIcon(...msg);
+        else {
+          msg = ["success", dt.user.name, "Welcome ", "bottomRight"];
+          axios.defaults.headers.common = {
+            Authorization: `Bearer ${dt.token}`,
+          };
+          localStorage.setItem("token", JSON.stringify(dt.token));
+          localStorage.setItem("user", JSON.stringify(dt.user));
+        }
 
-        const menu = appendPid(JSON.parse(dt.menu));
-        // dispatch(persistVariable({ token: dt.token }));
-        // dispatch(persistVariable({ menu: menu }));
-        // dispatch(persistVariable({ adminmenu: dt.adminmenu }));
-        //dispatch(globalVariable({ control: dt.control }));
-        //dispatch(persistVariable({ login: dt.user }));
-        axios.defaults.headers.common = { Authorization: `Bearer ${dt.token}` };
-        localStorage.setItem("openmenu", JSON.stringify(dt.openmenu));
-        localStorage.setItem("menu", JSON.stringify(menu));
-        localStorage.setItem("token", JSON.stringify(dt.token));
-        //dispatch(globalVariable({ token: dt.token }));
+        openNotificationWithIcon(...msg);
         props.history.push(`${from.pathname}`);
       })
       .catch(function (error) {
@@ -127,30 +110,12 @@ const SignIn = (props) => {
       });
   };
 
-  // const { values, handleChange, handleSubmit, handleSubmitCallback } = useForm(
-  //   remotelogin,
-  //   props
-  // );
-  const classes = useStyles();
   return (
     <>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Link to="/" exact>
-          {" "}
-          <Typography>IMCMaster </Typography>
-          {/* <Grid container className={classes.logo} justify="flex-start">
-            <Grid item>
-              <img
-                src={logo}
-                className="d-inline-block align-bottom"
-                width="60"
-              />
-            </Grid>
-            <Grid item>
-              <img src={imclogo} className="d-inline-block align-top" />
-            </Grid>
-          </Grid> */}
+          <Typography>Home </Typography>
         </Link>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -164,7 +129,7 @@ const SignIn = (props) => {
               fullWidth
               id="id"
               label="user id"
-              name="id"
+              name="username"
               autoComplete="email"
               autoFocus
               onBlur={handleChange}
@@ -234,19 +199,4 @@ const SignIn = (props) => {
     </>
   );
 };
-// export function isLoggedIn() {
-//   const token = useSelector(state => state.global.token);
-//   return(
-
-//   )
-//   if (token != "") return true;
-//   else return false;
-// }
-// export function getToken() {
-//   return useSelector(state => state.global.token);
-// }
-// export function removeToken() {
-//   const dispatch = useDispatch();
-//   dispatch(globalVariable({ token: "" }));
-// }
 export default SignIn;
