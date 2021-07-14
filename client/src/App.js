@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./Layouts/Home";
 import Login from "./Login/Login";
 import Join from "./Login/Join";
+import Admin from "./Layouts/Admin";
 import "antd/dist/antd.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function App() {
           )}
         />
         <Route path="/join" component={Join} />
+        <Route path="/admin" component={Admin} />
       </Switch>
     </Router>
   );

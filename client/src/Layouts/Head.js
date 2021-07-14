@@ -25,9 +25,6 @@ const Topmenu = ({ menu }) => {
         return a.seq < b.seq ? -1 : 1;
       });
   return (
-    // <Nav className="mr-auto" onSelect={handleSelect}>
-    //   <AntMenu menuList={topmenu} />
-    // </Nav>
     <Nav className="mr-auto" onSelect={handleSelect}>
       {topmenu &&
         topmenu.map((dt, i) => {
@@ -92,8 +89,6 @@ const NavDropRecur = (props) => {
 
 const Head1 = (props) => {
   let menu1;
-  // const dispatch = useDispatch();
-  //const token = useSelector((state) => state.global.token);
   const [menu, setMenu] = useState();
   const token1 = localStorage.getItem("token");
   useEffect(() => {
@@ -112,15 +107,11 @@ const Head1 = (props) => {
   function handleSelect(selectedKey) {
     switch (selectedKey) {
       case "edit":
-        //const menu = JSON.parse(localStorage.getItem("menu"));
-        //const submenu = directChild(menu, "", "seq");
         var clone = cloneDeep(menu);
         clone.map((k, i) => {
           k.path = "/edit" + k.path;
           return null;
         });
-        //dispatch(globalVariable({ tempMenu: clone }));
-        //dispatch(globalVariable({ subMenu: submenu }));
         break;
       case "admin":
         break;
@@ -128,16 +119,7 @@ const Head1 = (props) => {
         break;
     }
   }
-  const topbrand = (
-    <Navbar.Brand href="#home">
-      {/* <img
-        src={process.env.PUBLIC_URL + "/netminer.png"}
-        className="d-inline-block align-top"
-        style={{ width: 20, marginRight: 4, paddingTop: 7 }}
-      /> */}
-      Home
-    </Navbar.Brand>
-  );
+  const topbrand = <Navbar.Brand href="#home">Home</Navbar.Brand>;
 
   const navDropdownTitle = <FaUser style={{ fontSize: 25 }} />;
 

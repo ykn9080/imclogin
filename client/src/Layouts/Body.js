@@ -27,6 +27,7 @@ const Body = (props) => {
                 <Title level={5}>Welcome, {user?.name}</Title>,
                 <Button
                   key="buy"
+                  type="primary"
                   onClick={() => {
                     logout();
                     history.push("/");
