@@ -9,6 +9,9 @@ var config = require("../config/");
 
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
+  app.get("/signup", function (req, res) {
+    res.render("signup");
+  });
 
   app.post("/signup", function (req, res, next) {
     // generate the authenticate method and pass the req/res

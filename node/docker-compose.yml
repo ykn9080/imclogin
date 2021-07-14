@@ -16,15 +16,15 @@ services:
     networks:
       - kong-net
     volumes:
-      # //- jsondata:/data/json
-      # - images:/data/images
       - /.env:/app/.env
     ports:
       - "9001:9001"
-    external_links:
+      # if you want to link to exsiting mongodb
+      # use external_links(container name) as below
+      external_links:
       - imcmongoc
-  ## if you want to link to exsiting mongodb
-  ## use external_links(container name)
+
+
   # imcmongo:
   #   container_name: imcmongoc
   #   image: yknam/imcmongo:first

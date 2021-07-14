@@ -5,6 +5,9 @@ var config = require("../config/");
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
   console.log("im in login");
+  app.get("/login", function (req, res) {
+    res.render("login");
+  });
   app.get("/login/id", function (req, res) {
     // render the page and pass in any flash data if it exists
     //res.render('login.html', {message: req.flash('loginMessage')});
