@@ -71,8 +71,16 @@ module.exports = (app, passport) => {
         };
 
         const JWTToken = jwt.sign(payload, config.basic.passport.jwtSecret, {
-          expiresIn: "6h",
+          expiresIn: "5m",
         });
+        const REFRESHToken = jwt.sign(
+          payload,
+          config.basic.passport.jwtSecret,
+          {
+            expiresIn: "6h",
+          }
+        );
+
         console.log("username:", user);
         //return res.render("index.ejs", { user: { name: user.name } });
 
@@ -80,7 +88,8 @@ module.exports = (app, passport) => {
         req.flash("success", user.name);
         //res.redirect("/");
         return res.status(200).json({
-          token: JWTToken,
+          access_token: JWTToken,
+          refresh_token: REFRESHToken,
           user: user,
         });
 
