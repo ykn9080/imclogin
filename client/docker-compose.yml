@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imclogin_client
+    image: yknam/imclogin_client
+    networks:
+      - kong-net
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "6005:80"

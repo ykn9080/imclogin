@@ -43,5 +43,5 @@ initPassport(app, passport);
 
 require("./router/index.js")(app, passport);
 
-const PORT = process.env.PORT | 9001;
+const PORT = process.env.PORT | 6005;
 app.listen(PORT, () => console.log("listening on localhost:" + PORT));
