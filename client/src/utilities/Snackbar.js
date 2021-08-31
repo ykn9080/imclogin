@@ -11,9 +11,7 @@ const Snack = ({ warning, severity, message }) => {
   if (!message) message = "No message";
 
   const [open, setOpen] = useState(warning);
-  const handleClick = () => {
-    setOpen(true);
-  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

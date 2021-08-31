@@ -21,9 +21,8 @@ services:
       - "6006:6006"
       # if you want to link to exsiting mongodb
       # use external_links(container name) as below
-      external_links:
+    external_links:
       - imcmongoc
-
 
   # imcmongo:
   #   container_name: imcmongoc

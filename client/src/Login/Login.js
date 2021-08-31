@@ -14,6 +14,7 @@ import axios from "axios";
 import Snack from "../Utilities/Snackbar";
 import useKeyPress from "../Utilities/CustomHooks";
 import { notification } from "antd";
+import { GoogleLogin } from "react-google-login";
 
 const openNotificationWithIcon = (type, message, desc, placement) => {
   notification[type]({
@@ -109,7 +110,14 @@ const SignIn = (props) => {
         console.log("err:  ", error);
       });
   };
-
+  const responseGoogle = (response) => {
+    console.log(response);
+    setValues({
+      name: response.profileObj.name,
+      email: response.profileObj.email,
+      imageUrl: response.profileObj.imageUrl,
+    });
+  };
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -191,6 +199,15 @@ const SignIn = (props) => {
               severity={"error"}
             />
           </form>
+        </div>
+        <div>
+          <GoogleLogin
+            clientId={process.env.GOOGLE_CLIENT_ID}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
         <Box mt={8}>
           <Copyright />
