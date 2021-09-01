@@ -86,12 +86,12 @@ module.exports = (app, passport) => {
 
         //return res.render("index", { user: { name: user.name } });
         req.flash("success", user.name);
-        //res.redirect("/");
-        return res.status(200).json({
-          access_token: JWTToken,
-          refresh_token: REFRESHToken,
-          user: user,
-        });
+        res.redirect("/");
+        // return res.status(200).json({
+        //   access_token: JWTToken,
+        //   refresh_token: REFRESHToken,
+        //   user: user,
+        // });
 
         // return res
         //   .render("index.ejs", { user: { name: user.name } })
