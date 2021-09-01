@@ -14,7 +14,9 @@ import axios from "axios";
 import Snack from "../Utilities/Snackbar";
 import useKeyPress from "../Utilities/CustomHooks";
 import { notification } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
 import { GoogleLogin } from "react-google-login";
+require("dotenv").config();
 
 const openNotificationWithIcon = (type, message, desc, placement) => {
   notification[type]({
@@ -202,10 +204,10 @@ const SignIn = (props) => {
         </div>
         <div>
           <GoogleLogin
-            clientId={process.env.GOOGLE_CLIENT_ID}
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} //"823327971964-ufl9hfdj0jf2pg8s3em6ased90nnmg2j.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
-            onFailure={responseGoogle}
+            onFailure={(response) => console.log(response)}
             cookiePolicy={"single_host_origin"}
           />
         </div>
