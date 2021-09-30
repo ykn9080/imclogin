@@ -18,7 +18,7 @@ services:
     volumes:
       - /.env:/app/.env
     ports:
-      - "8005:8005"
+      - "8006:8006"
       # if you want to link to exsiting mongodb
       # use external_links(container name) as below
     # external_links:
