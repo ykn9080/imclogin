@@ -14,4 +14,4 @@ services:
     volumes:
       - ./src:/app/src
     ports:
-      - "6005:80"
+      - "8005:80"

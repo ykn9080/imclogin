@@ -18,7 +18,7 @@ services:
     volumes:
       - /.env:/app/.env
     ports:
-      - "6006:6006"
+      - "8005:8005"
       # if you want to link to exsiting mongodb
       # use external_links(container name) as below
     # external_links:
@@ -34,4 +34,4 @@ services:
       #- ../Program\ Files/MongoDB/Server/4.0/data:/data/db
       - mongodbdatatest:/data/db
     ports:
-      - "6007:27017"
+      - "8007:27017"
