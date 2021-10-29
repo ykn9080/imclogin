@@ -1,5 +1,5 @@
 var LocalStrategy = require("passport-local").Strategy;
-var User = require("../model/user");
+var User = require("../model/models").User;
 // var Company = require("../model/company");
 var bCrypt = require("bcrypt-nodejs");
 var config = require("../config/");

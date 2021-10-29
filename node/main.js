@@ -1,6 +1,7 @@
 // ESM syntax is supported.
 var express = require("express");
 var flash = require("connect-flash");
+
 var passport = require("passport");
 var path = require("path");
 var cors = require("cors");
@@ -43,5 +44,5 @@ initPassport(app, passport);
 
 require("./router/index.js")(app, passport);
 
-const PORT = process.env.PORT | 6006;
+const PORT = process.env.PORT | 8006;
 app.listen(PORT, () => console.log("listening on localhost:" + PORT));

@@ -12,7 +12,7 @@
     <script>
         $(document).ready(function () {
             let username;
-            if('<%=username%>') username= '<%- username%>'
+            if ('<%=username%>') username = '<%- username%>'
             if (username){$("#dvUser").show().addClass("form-inline");$("#dvUser").find("label").text(`${username} logout`); $("#dvNone").hide()}
             else {$("#dvUser").hide(); $("#dvNone").show()}
         
@@ -46,5 +46,6 @@
                 <button type="button" class="btn btn-outline-primary"><a href="/signup" ><span class="fa fa-plus"></span> Signup</a></button>
         </div>
     </div>
+
 </body>
 </html>

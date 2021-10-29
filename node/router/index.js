@@ -1,4 +1,5 @@
 var session = require("express-session");
+const dotenv = require("dotenv").config();
 var path = require("path");
 var passport = require("passport");
 module.exports = (app) => {
@@ -13,7 +14,6 @@ module.exports = (app) => {
   app.use(passport.session());
   require("./githubLogin.js")(app, passport);
   require("./googleLogin.js")(app, passport);
-  require("./googleLogin.js")(app, passport);
   require("./login.js")(app, passport);
   require("./signup.js")(app, passport);
   require("./setting.js")(app, passport);
@@ -27,12 +27,12 @@ module.exports = (app) => {
   // });
 
   app.route("/").get(async (req, res) => {
-    console.log("req.flash", req.flash("success"));
     let username;
     if (req.flash("success").length > 0) username = req.flash("success")[0];
     else if (req.user) {
-      if (req.user.name) username = req.user.name;
-      else if (req.user.displayName) username = req.user.displayName;
+      if (req.user.displayName) username = req.user.displayName;
+      else if (req.user.name) username = req.user.name;
+      else if (req.user.username) username = req.user.username;
     }
 
     // layout.ejs is my version of blocking. I pass the page name as an option to render custom pages in the template

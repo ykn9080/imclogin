@@ -4,7 +4,8 @@ var os = require("os");
 // config.js
 const basic = {
   mongodb: {
-    local: "mongodb://local:27017/local",
+    local: "mongodb://local:8007/logintest",
+
     docean: "mongodb://167.71.208.218:8001/local",
     cyram_dev: "mongodb://src.netminer.com:9007/local",
     namubuntu: "mongodb://imcmaster.iptime.org:9007/local",
@@ -30,7 +31,7 @@ const basic = {
   },
 };
 let currentsetting = {
-  datasrc: basic.mongodb.wifiubuntu,
+  datasrc: basic.mongodb.local,
   port: 9006,
 };
 dns.lookup(os.hostname(), function (err, addr, family) {

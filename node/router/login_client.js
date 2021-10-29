@@ -1,6 +1,6 @@
 var Model = require("../model/models.js");
 var User = Model.User;
-var config = require("../config/");
+var config = require("../config");
 
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
@@ -87,13 +87,13 @@ module.exports = (app, passport) => {
         //return res.render("index", { user: { name: user.name } });
         req.flash("success", user.name);
         //res.redirect("/");
-        // return res.status(200).json({
-        //   access_token: JWTToken,
-        //   refresh_token: REFRESHToken,
-        //   user: user,
-        // });
+        return res.status(200).json({
+          access_token: JWTToken,
+          refresh_token: REFRESHToken,
+          user: user,
+        });
 
-        return res.render("index.ejs", { username: user.name });
+        //return res.render("index.ejs", { username: user.name });
         // .status(200)
         // .json({
         //   token: JWTToken,
