@@ -5,6 +5,18 @@ var config = require("../config/");
 module.exports = (app, passport) => {
   /* GET ALL PRODUCTS */
   console.log("im in login");
+  /**
+   * @swagger
+   * paths:
+   *  /login:
+   *    get:
+   *      summary: test get
+   *      produces:
+   *        application/json
+   *      responses:
+   *        200:
+   *          description: ok
+   */
   app.get("/login", function (req, res) {
     res.render("login");
   });

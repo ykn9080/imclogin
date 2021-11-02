@@ -33,7 +33,40 @@ module.exports = (app, passport) => {
       });
   });
 
-  app.post("/login", function (req, res, next) {
+  /**
+   * @swagger
+   * paths:
+   *  /login_client:
+   *    post:
+   *      summary: oauth login from client side
+   *      consumes:
+   *        - application/json
+   *      parameters:
+   *        - in: body
+   *          name: username
+   *          description: id, email or name.
+   *          schema:
+   *            $ref: '#/definitions/login_client'
+   *          responses:
+   *            '200':
+   *              description: Successfully logged in
+   *              content:
+   *                application/json:
+   *                  schema:
+   *                    type: object
+   *                    properties:
+   *                      access_token:
+   *                        type: string
+   *                        description: cookie for access
+   *                      refresh_token:
+   *                        type: string
+   *                        description: when expired refresh
+   *                      user:
+   *                        type: object
+   *                        description: logged in user profile
+   */
+
+  app.post("/login_client", function (req, res, next) {
     // generate the authenticate method and pass the req/res
     passport.authenticate("login", function (err, user, info) {
       if (err) {
@@ -103,3 +136,21 @@ module.exports = (app, passport) => {
     })(req, res, next);
   });
 };
+
+/**
+ * @swagger
+ *
+ * definitions:
+ *   login_client:
+ *    type: object
+ *    required:
+ *      - username
+ *      - password
+ *    properties:
+ *      username:
+ *        type: string
+ *        example: ykn
+ *      password:
+ *        type: string
+ *        example: 9080
+ */

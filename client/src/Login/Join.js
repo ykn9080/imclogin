@@ -112,7 +112,7 @@ export default function SignUp(props) {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="fname"
-                  name="id"
+                  name="username"
                   variant="outlined"
                   required
                   fullWidth

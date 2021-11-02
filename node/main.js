@@ -43,6 +43,8 @@ var initPassport = require("./passport/init");
 initPassport(app, passport);
 
 require("./router/index.js")(app, passport);
+require("./swagger/index.js")(app);
 
 const PORT = process.env.PORT | 8006;
-app.listen(PORT, () => console.log("listening on localhost:" + PORT));
+const HOST = process.env.HOST;
+app.listen(PORT, () => console.log(`listening on ${HOST}:${PORT}`));

@@ -1,6 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 var User = require("../model/user");
-const svr = "http://" + process.env.HOST + ":" + process.env.PORT;
+const svr = process.env.HOST + ":" + process.env.PORT;
 
 module.exports = (app, passport) => {
   passport.use(

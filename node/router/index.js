@@ -15,8 +15,10 @@ module.exports = (app) => {
   require("./githubLogin.js")(app, passport);
   require("./googleLogin.js")(app, passport);
   require("./login.js")(app, passport);
+  require("./login_client.js")(app, passport);
   require("./signup.js")(app, passport);
   require("./setting.js")(app, passport);
+  require("./user.js")(app, passport);
 
   // app.get("/", passport.authenticate("local"), function (req, res) {
   //   console.log(req.user);

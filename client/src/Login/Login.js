@@ -16,7 +16,6 @@ import useKeyPress from "../Utilities/CustomHooks";
 import { notification } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { GoogleLogin } from "react-google-login";
-require("dotenv").config();
 
 const openNotificationWithIcon = (type, message, desc, placement) => {
   notification[type]({
@@ -58,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = (props) => {
   //for snackBar props
-
   const state = props.location.state;
   const refEnter = useRef(null);
   const refPass = useRef(null);
@@ -86,11 +84,13 @@ const SignIn = (props) => {
   }, [pressedEnter]);
 
   const handleSubmit = async (e) => {
+    console.log("clicked", values, process.env.REACT_APP_SERVER_URL);
     e.preventDefault();
     let msg;
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/login`, values)
+      .post(`${process.env.REACT_APP_SERVER_URL}/login_client`, values)
       .then(function (response) {
+        console.log(response.data, values);
         const dt = response.data;
 
         if (dt.hasOwnProperty("message"))

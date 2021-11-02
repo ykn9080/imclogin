@@ -2,7 +2,7 @@ const GithubStrategy = require("passport-github2").Strategy;
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const svr = "http://" + process.env.HOST + ":" + process.env.PORT;
+const svr = process.env.HOST + ":" + process.env.PORT;
 
 module.exports = (app, passport) => {
   passport.use(
